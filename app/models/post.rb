@@ -3,6 +3,7 @@ class Post < ActiveRecord::Base
   validates :content, length: { minimum: 250 }
   validates :summary, length: { maximum: 250}
   validates :category, inclusion: { in: %w(Fiction Non-Fiction)}
+end 
 
 class ClickbaitValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
@@ -10,4 +11,4 @@ class ClickbaitValidator < ActiveModel::EachValidator
       record.errors[attribute] << ("Not a clickbait title")
     end
   end
-end
+end 
