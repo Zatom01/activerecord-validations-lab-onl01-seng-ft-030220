@@ -5,4 +5,12 @@ class Post < ActiveRecord::Base
   validates :category, inclusion: { in: %w(Fiction Non-Fiction)}
   
   validate :title_contains?
+  
+  @@keywords = [ /Won't Believe/i, /Secret/i, /Top [0-9]*/i,  /Guess/i]
+
+  def title_contains?
+    if !@@keywords.any? { |word| word.match title }
+     errors.add(:title, "Must be clickbait")
+    end
+  end
 end
